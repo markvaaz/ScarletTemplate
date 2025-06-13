@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Mark Vaaz",
+  "classifications": [
+    "V Rising",
+    "Mod",
+    "Scarlet"
+  ],
+  "identity": "Scarlet.Template",
+  "name": "ScarletTemplate",
+  "shortName": "scarlettemplate",
+  "description": "Modular template for creating V Rising mods with optional dependencies",
+  "sourceName": "ScarletTemplate",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "use_vcf": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Include VampireCommandFramework dependency"
+    },
+    "use_rcon_soft": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Include ScarletRCON with soft integration"
+    },
+    "use_rcon_hard": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Include ScarletRCON with full integration"
+    }
+  },
+  "primaryOutputs": [
+    {
+      "path": "{{name}}.csproj"
+    },
+    {
+      "path": "Plugin.cs"
+    },
+    {
+      "path": "nuget.config"
+    }
+  ]
+}
