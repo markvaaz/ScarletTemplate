@@ -47,6 +47,7 @@ public class Plugin : BasePlugin
 
     Settings = new Settings(MyPluginInfo.PLUGIN_GUID, Instance);
     Database = new Database(MyPluginInfo.PLUGIN_GUID);
+    GameSystems.OnInitialize(Initialize);
 #if use_vcf
     CommandRegistry.RegisterAll();
 #endif
@@ -56,6 +57,11 @@ public class Plugin : BasePlugin
 #if use_rcon_hard
     CommandHandler.RegisterAll();
 #endif
+  }
+  
+  private void Initialize()
+  {
+   
   }
 
   public override bool Unload()
