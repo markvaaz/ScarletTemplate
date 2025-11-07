@@ -70,18 +70,9 @@ public class Plugin : BasePlugin
 #if use_rcon_hard
     CommandHandler.UnregisterAssembly();
 #endif
+    ActionScheduler.UnregisterAssembly(Assembly.GetExecutingAssembly());
+    EventManager.UnregisterAssembly(Assembly.GetExecutingAssembly());
     return true;
-  }
-
-  public static void ReloadSettings()
-  {
-    Settings.Dispose();
-    LoadSettings();
-  }
-  public static void LoadSettings()
-  {
-    Settings.Section("General")
-      .Add("Enable", true, "Enable or disable the plugin");
   }
 
 #if use_vcf
@@ -90,7 +81,7 @@ public class Plugin : BasePlugin
   public class CommandGroup
   {
     [Command("commandname", "Description of the command")]
-    public static void CommandName(CommandContext context)
+    public static void CommandName(ChatCommandContext context)
     {
       // Command implementation
       context.Reply("Command executed successfully!");
