@@ -3,6 +3,7 @@ using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 using ScarletCore.Data;
+using ScarletCore.Systems;
 #if use_vcf
 using VampireCommandFramework;
 #endif
