@@ -17,12 +17,6 @@
     "type": "project"
   },
   "symbols": {
-    "use_vcf": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "false",
-      "description": "Include VampireCommandFramework dependency"
-    },
     "use_rcon_soft": {
       "type": "parameter",
       "datatype": "bool",
