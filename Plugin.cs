@@ -6,24 +6,13 @@ using HarmonyLib;
 using ScarletCore.Commanding;
 using ScarletCore.Data;
 using ScarletCore.Events;
+using ScarletCore.Localization;
 using ScarletCore.Systems;
-#if use_rcon_soft
-using ScarletRCON.Shared;
-#endif
-#if use_rcon_hard
-using ScarletRCON.CommandSystem;
-#endif
 
 namespace ScarletTemplate;
 
 [BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, MyPluginInfo.PLUGIN_VERSION)]
 [BepInDependency("markvaaz.ScarletCore")]
-#if use_rcon_soft
-[BepInDependency("markvaaz.ScarletRCON")] 
-#endif
-#if use_rcon_hard
-[BepInDependency("markvaaz.ScarletRCON")]
-#endif
 public class Plugin : BasePlugin {
   static Harmony _harmony;
   public static Harmony Harmony => _harmony;
@@ -44,12 +33,7 @@ public class Plugin : BasePlugin {
     Settings = new Settings(MyPluginInfo.PLUGIN_GUID, Instance);
     Database = new Database(MyPluginInfo.PLUGIN_GUID);
     GameSystems.OnInitialize(Initialize);
-#if use_rcon_soft
-    RconCommandRegistrar.RegisterAll();
-#endif
-#if use_rcon_hard
     CommandHandler.RegisterAll();
-#endif
   }
 
   private void Initialize() {
@@ -58,14 +42,9 @@ public class Plugin : BasePlugin {
 
   public override bool Unload() {
     _harmony?.UnpatchSelf();
-#if use_rcon_soft
-    RconCommandRegistrar.UnregisterAssembly();
-#endif
-#if use_rcon_hard
+    ActionScheduler.UnregisterAssembly();
+    EventManager.UnregisterAssembly();
     CommandHandler.UnregisterAssembly();
-#endif
-    ActionScheduler.UnregisterAssembly(Assembly.GetExecutingAssembly());
-    EventManager.UnregisterAssembly(Assembly.GetExecutingAssembly());
     return true;
   }
 
@@ -77,7 +56,7 @@ public class Plugin : BasePlugin {
     [Command("hello", Language.English, description: "Say hello")]
     [CommandAlias("ola", Language.Portuguese, description: "Dizer olá")]
     public static void HelloCommand(CommandContext ctx) {
-      ctx.ReplySuccess($"Hello {ctx.User.CharacterName}!");
+      ctx.ReplySuccess($"Hello {ctx.Sender.Name}!");
     }
 
     [Command("info", Language.English, description: "Get player info")]
@@ -86,19 +65,4 @@ public class Plugin : BasePlugin {
       ctx.ReplySuccess($"Player: {player.Name}, Level: {player.Level}");
     }
   }
-
-#if use_rcon_soft || use_rcon_hard
-/*
-  [RconCommandCategory("categoryname")]
-  public class RconCommandCategory
-  {
-    [RconCommand("commandname", "Description of the command")]
-    public static string CommandName()
-    {
-      // Command implementation
-      return "Command executed successfully!"
-    }
-  }
-*/
-#endif
 }

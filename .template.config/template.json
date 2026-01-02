@@ -16,20 +16,7 @@
     "language": "C#",
     "type": "project"
   },
-  "symbols": {
-    "use_rcon_soft": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "false",
-      "description": "Include ScarletRCON with soft integration"
-    },
-    "use_rcon_hard": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "false",
-      "description": "Include ScarletRCON with full integration"
-    }
-  },
+  "symbols": {},
   "primaryOutputs": [
     {
       "path": "{{name}}.csproj"

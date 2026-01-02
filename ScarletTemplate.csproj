@@ -17,12 +17,6 @@
     <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
     <PackageReference Include="VRising.Unhollowed.Client" Version="1.1.*" />
     <PackageReference Include="ScarletCore" Version="1.*" />
-<!--#if (use_rcon_soft)-->
-    <PackageReference Include="ScarletRCON.SourceSupport" Version="1.1.*" />
-<!--#endif-->
-<!--#if (use_rcon_hard)-->
-    <PackageReference Include="ScarletRCON" Version="1.1.*" />
-<!--#endif-->
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
