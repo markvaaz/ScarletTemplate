@@ -17,37 +17,16 @@ dotnet new install ScarletTemplate
 Create a new V Rising mod project:
 
 ```bash
-# Basic mod with ScarletCore only
 dotnet new scarlettemplate -n MyMod
-
-# With VampireCommandFramework support
-dotnet new scarlettemplate -n MyMod --use_vcf
-
-# With ScarletRCON soft integration
-dotnet new scarlettemplate -n MyMod --use_vcf --use_rcon_soft
-
-# With ScarletRCON full integration
-dotnet new scarlettemplate -n MyMod --use_vcf --use_rcon_hard
 ```
 
 ## 📦 What's Included
 
-### Core Dependencies (Always Included)
-- **ScarletCore**: Core framework for V Rising mods
+### Dependencies
+- **ScarletCore**: Core framework for V Rising mods with integrated command system
 - **BepInEx**: Mod framework for Unity games
 - **VRising.Unhollowed.Client**: V Rising game bindings
 
-### Optional Dependencies
-- **VampireCommandFramework** (`--use_vcf`): Command system for in-game commands
-- **ScarletRCON** (`--use_rcon_soft` / `--use_rcon_hard`): Remote console integration
-
-## 🛠️ Template Options
-
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--use_vcf` | Include VampireCommandFramework dependency | `false` |
-| `--use_rcon_soft` | Include ScarletRCON with soft integration | `false` |
-| `--use_rcon_hard` | Include ScarletRCON with full integration | `false` |
 
 ## 📁 Generated Project Structure
 
@@ -76,28 +55,26 @@ public class Plugin : BasePlugin
 }
 ```
 
-### With VCF Commands (when `--use_vcf` is used)
+### Commands with ScarletCore
 ```csharp
-[CommandGroup("mymod")]
-public class MyCommands
-{
-    [Command("hello", "Say hello")]
-    public static void HelloCommand(CommandContext context)
-    {
-        context.Reply("Hello from my mod!");
-    }
-}
-```
+using ScarletCore.Commanding;
 
-### With RCON Support (when `--use_rcon_*` is used)
-```csharp
-[RconCommandCategory("mymod")]
-public class MyRconCommands
+[CommandGroup("mymod", Language.English, adminOnly: false)]
+[CommandGroupAlias("meuplugin", Language.Portuguese)]
+public static class MyCommands
 {
-    [RconCommand("status", "Get mod status")]
-    public static string StatusCommand()
+    [Command("hello", Language.English, description: "Say hello")]
+    [CommandAlias("ola", Language.Portuguese, description: "Dizer olá")]
+    public static void HelloCommand(CommandContext ctx)
     {
-        return "Mod is running!";
+        ctx.ReplySuccess($"Hello {ctx.User.CharacterName}!");
+    }
+
+    [Command("info", Language.English, description: "Get player info")]
+    [CommandAlias("informacao", Language.Portuguese, description: "Obter informações")]
+    public static void InfoCommand(CommandContext ctx, PlayerData player)
+    {
+        ctx.ReplySuccess($"Player: {player.Name}, Level: {player.Level}");
     }
 }
 ```
@@ -136,5 +113,4 @@ C:\Program Files (x86)\Steam\steamapps\common\VRisingDedicatedServer\BepInEx\plu
 
 - [V Rising](https://store.steampowered.com/app/1604030/V_Rising/)
 - [BepInEx](https://github.com/BepInEx/BepInEx)
-- [VampireCommandFramework](https://github.com/decaprime/VampireCommandFramework)
 - [ScarletCore](https://github.com/markvaaz/ScarletCore)
