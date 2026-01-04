@@ -6,7 +6,6 @@ using HarmonyLib;
 using ScarletCore.Commanding;
 using ScarletCore.Data;
 using ScarletCore.Events;
-using ScarletCore.Localization;
 using ScarletCore.Systems;
 
 namespace ScarletTemplate;
@@ -37,7 +36,7 @@ public class Plugin : BasePlugin {
   }
 
   private void Initialize() {
-
+    // Your initialization code here
   }
 
   public override bool Unload() {
@@ -48,7 +47,7 @@ public class Plugin : BasePlugin {
     return true;
   }
 
-  // Example command group using the new ScarletCore command system
+  /* Example command group using the new ScarletCore command system
   [CommandGroup("example", Language.English, adminOnly: false)]
   [CommandGroupAlias("exemplo", Language.Portuguese)]
   public static class ExampleCommands {
@@ -60,9 +59,10 @@ public class Plugin : BasePlugin {
     }
 
     [Command("info", Language.English, description: "Get player info")]
-    [CommandAlias("informacao", Language.Portuguese, description: "Obter informações do jogador")]
+    [CommandAlias("informação", Language.Portuguese, description: "Obter informações do jogador")]
     public static void InfoCommand(CommandContext ctx, PlayerData player) {
       ctx.ReplySuccess($"Player: {player.Name}, Level: {player.Level}");
     }
   }
+  */
 }
