@@ -19,6 +19,11 @@
     <PackageReference Include="ScarletCore" Version="1.5.*" />
   </ItemGroup>
 
+  <!-- Remove the comments below to include localization files in the build -->
+  <!-- <ItemGroup>
+    <EmbeddedResource Include="Localization\**\*.*" />
+  </ItemGroup> -->
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="copy &quot;$(TargetPath)&quot; &quot;C:\Program Files (x86)\Steam\steamapps\common\VRisingDedicatedServer\BepInEx\plugins&quot; " ContinueOnError="true" />
 	</Target>

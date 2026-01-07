@@ -7,6 +7,7 @@ using ScarletCore.Commanding;
 using ScarletCore.Data;
 using ScarletCore.Events;
 using ScarletCore.Systems;
+using ScarletCore.Localization;
 
 namespace ScarletTemplate;
 
@@ -36,7 +37,8 @@ public class Plugin : BasePlugin {
   }
 
   private void Initialize() {
-    // Your initialization code here
+    // Remove the comment below to enable localization loading from the Localization folder
+    // Localizer.AutoLoadFromLocalizationFolder();
   }
 
   public override bool Unload() {
@@ -44,6 +46,7 @@ public class Plugin : BasePlugin {
     ActionScheduler.UnregisterAssembly();
     EventManager.UnregisterAssembly();
     CommandHandler.UnregisterAssembly();
+    Localizer.Dispose();
     return true;
   }
 
